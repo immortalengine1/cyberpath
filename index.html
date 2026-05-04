@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberPath — Newcastle</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080b0e;--sf:#0f1318;--sf2:#161b22;--sf3:#1c2230;--bd:#1e2a38;--bd2:#273548;--tx:#e2e8f0;--mu:#64748b;--dm:#334155;--ac:#00d4ff;--a2:#00ff9d;--a3:#ff6b35;--a4:#b388ff;--a5:#ffd166;--mor:#08192a;--mtx:#38bdf8;--aft:#08201a;--atx:#34d399;--rst:#0f1520;--rtx:#334155;--r:10px;--rlg:16px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:50;background:rgba(8,11,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:0;padding:0 24px;height:52px}
+.nb{font-size:14px;font-weight:800;color:var(--ac);font-family:'JetBrains Mono',monospace;margin-right:24px;letter-spacing:-.02em}
+.nts{display:flex;gap:2px;flex:1;overflow-x:auto}
+.nt{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;color:var(--mu);cursor:pointer;white-space:nowrap;border:none;background:none;transition:all .15s;font-family:'Syne',sans-serif}
+.nt:hover{color:var(--tx);background:var(--sf2)}.nt.active{color:var(--ac);background:rgba(0,212,255,.08)}
+.nr{display:flex;gap:8px;align-items:center;margin-left:auto}
+.xpb{display:flex;align-items:center;gap:5px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.3);color:var(--a5);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px}
+.stb{display:flex;align-items:center;gap:5px;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.3);color:var(--a3);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px}
+.page{display:none;position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:32px 24px 80px}.page.active{display:block}
+.hero{padding:32px 0 28px;border-bottom:1px solid var(--bd);margin-bottom:28px}
+.htag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);color:var(--ac);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:4px;margin-bottom:14px;letter-spacing:.05em}
+.htag::before{content:'▶';font-size:8px}
+h1{font-size:clamp(26px,5vw,42px);font-weight:800;line-height:1.1;letter-spacing:-.02em}h1 span{color:var(--ac)}
+.hsub{margin-top:8px;color:var(--mu);font-size:13px;font-family:'JetBrains Mono',monospace}
+.sg{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.sc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:12px 18px;text-align:center;min-width:80px}
+.sv{font-size:20px;font-weight:800;color:var(--ac);font-family:'JetBrains Mono',monospace;line-height:1}
+.sv.g{color:var(--a2)}.sv.o{color:var(--a3)}.sv.y{color:var(--a5)}.sv.p{color:var(--a4)}
+.sl{font-size:9px;color:var(--mu);margin-top:3px;letter-spacing:.08em;text-transform:uppercase}
+.pw{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px 22px;margin-bottom:24px}
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pt{font-size:13px;font-weight:600}.pp{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ac)}
+.track{height:6px;background:var(--bd2);border-radius:3px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--ac),var(--a2));border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.br{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r);border:1px solid var(--bd2);background:var(--sf2);color:var(--tx);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn:hover{border-color:var(--ac);color:var(--ac)}.btn.a{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--ac)}
+.btn.g{background:rgba(0,255,157,.08);border-color:rgba(0,255,157,.3);color:var(--a2)}
+.btn.o{background:rgba(255,107,53,.1);border-color:rgba(255,107,53,.3);color:var(--a3)}
+.smb{font-size:11px;color:var(--mu);background:none;border:1px solid var(--bd);padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:all .15s}
+.smb:hover{color:var(--ac);border-color:var(--ac)}
+.ptabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.ptab{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--r);border:1px solid var(--bd);background:var(--sf);color:var(--mu);cursor:pointer;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;transition:all .2s;text-align:left}
+.ptab:hover{border-color:var(--bd2);color:var(--tx)}
+.ptab.active.p0{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--ac)}
+.ptab.active.p1{background:rgba(0,255,157,.08);border-color:rgba(0,255,157,.3);color:var(--a2)}
+.ptab.active.p2{background:rgba(179,136,255,.08);border-color:rgba(179,136,255,.3);color:var(--a4)}
+.tnum{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'JetBrains Mono',monospace;background:var(--bd2);color:var(--mu);flex-shrink:0}
+.ptab.active .tnum{background:currentColor;color:var(--bg)}
+.psec{display:none}.psec.active{display:block}
+.pshdr{margin-bottom:18px}.pshdr h2{font-size:18px;font-weight:700;margin-bottom:4px}.pshdr p{font-size:12px;color:var(--mu);font-family:'JetBrains Mono',monospace}
+.wcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.wcard:hover{border-color:var(--bd2)}.wcard.done{border-color:rgba(0,255,157,.25)}.wcard.cur{border-color:rgba(0,212,255,.35);box-shadow:0 0 20px rgba(0,212,255,.05)}
+.wcard.open .warrow{transform:rotate(90deg)}.wcard.open .wbody{display:block}
+.whead{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none}
+.wcirc{width:26px;height:26px;border-radius:50%;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;flex-shrink:0;transition:all .2s;color:transparent}
+.wcirc:hover{border-color:var(--a2)}.wcard.done .wcirc{background:var(--a2);border-color:var(--a2);color:#080b0e}
+.winfo{flex:1;min-width:0}.wnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.wtitle{font-size:13px;font-weight:700;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wdates{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dm);margin-top:1px}
+.wright{display:flex;align-items:center;gap:10px}
+.wpbar{width:70px;height:3px;background:var(--bd2);border-radius:2px;overflow:hidden}
+.wpfill{height:100%;background:var(--a2);border-radius:2px;transition:width .4s}
+.wbadge{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--mu);white-space:nowrap}
+.warrow{color:var(--dm);font-size:11px;transition:transform .2s;flex-shrink:0}
+.wbody{display:none;border-top:1px solid var(--bd)}
+.dcols{display:grid;grid-template-columns:100px 1fr 1fr;gap:1px;padding:7px 18px 5px;background:var(--sf2)}
+.colh{font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--dm);letter-spacing:.08em;text-transform:uppercase}
+.drow{display:grid;grid-template-columns:100px 1fr 1fr;gap:1px;background:var(--bd);border-top:1px solid var(--bd)}
+.drow:first-of-type{border-top:none}
+.dnc{background:var(--sf2);padding:10px 12px;display:flex;flex-direction:column;justify-content:center}
+.dn{font-weight:700;font-size:11px;color:var(--tx)}.dd{font-size:9px;color:var(--mu);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.dck{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--bd2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;transition:all .15s;flex-shrink:0;margin-top:6px}
+.dck:hover{border-color:var(--a2)}.dck.ck{background:var(--a2);border-color:var(--a2);color:#080b0e}
+.sess{padding:10px 12px}.sess.mor{background:var(--mor)}.sess.aft{background:var(--aft)}
+.sess.rest{background:var(--rst);grid-column:span 2;display:flex;align-items:center;padding:10px 12px}
+.stype{font-size:8px;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:3px}
+.sess.mor .stype{color:var(--mtx)}.sess.aft .stype{color:var(--atx)}
+.stopic{font-size:11px;font-weight:700;color:var(--tx);margin-bottom:2px}
+.sdetail{font-size:11px;color:var(--mu);line-height:1.4}
+.slink{display:inline-flex;align-items:center;gap:3px;margin-top:4px;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--ac);text-decoration:none;opacity:.7;transition:opacity .15s}
+.slink:hover{opacity:1}.sess.aft .slink{color:var(--a2)}.rtext{font-size:11px;color:var(--rtx)}
+.tbadge{display:inline-flex;align-items:center;gap:4px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:var(--ac);font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;margin-left:7px;vertical-align:middle}
+.tbadge::before{content:'●';font-size:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.milestone{background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(0,255,157,.03));border:1px solid rgba(0,212,255,.2);border-radius:var(--rlg);padding:16px 20px;margin-top:14px;display:flex;gap:12px;align-items:flex-start}
+.mi-icon{font-size:18px;flex-shrink:0}.mi-title{font-size:10px;font-weight:700;color:var(--ac);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.mi-text{font-size:12px;color:var(--mu);line-height:1.6}
+.p3b{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px 20px;margin-bottom:10px}
+.p3b h3{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:6px}.p3b p{font-size:12px;color:var(--mu);line-height:1.7}
+.p3b .wr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--a4);margin-bottom:6px}
+.lvc{background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(255,107,53,.05));border:1px solid rgba(255,209,102,.25);border-radius:var(--rlg);padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.lvi{font-size:32px}.lvn{font-size:15px;font-weight:800;color:var(--a5);margin-bottom:4px}.lvd{font-size:12px;color:var(--mu);margin-bottom:8px}
+.lvb{height:4px;background:var(--bd2);border-radius:2px;overflow:hidden}
+.lvf{height:100%;background:linear-gradient(90deg,var(--a5),var(--a3));border-radius:2px;transition:width .6s}
+.lvx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--a5);margin-top:4px}
+/* TIMER */
+.tlayout{display:grid;grid-template-columns:1fr 300px;gap:20px}
+.tcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:28px;text-align:center;margin-bottom:16px}
+.tdisplay{font-family:'JetBrains Mono',monospace;font-size:clamp(44px,9vw,72px);font-weight:700;color:var(--ac);letter-spacing:.05em;line-height:1;margin:14px 0;text-shadow:0 0 40px rgba(0,212,255,.3);transition:color .3s}
+.tdisplay.run{color:var(--a2);text-shadow:0 0 40px rgba(0,255,157,.3);animation:tp 1s ease-in-out infinite}
+@keyframes tp{0%,100%{opacity:1}50%{opacity:.85}}
+.tlbl{font-size:11px;color:var(--mu);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.tsname{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:18px;min-height:20px}
+.tbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tbtn{padding:11px 26px;border-radius:var(--r);border:none;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
+.tbtn.st{background:linear-gradient(135deg,var(--a2),#00cc7a);color:#080b0e}
+.tbtn.st:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,255,157,.3)}
+.tbtn.sp{background:linear-gradient(135deg,var(--a3),#e05500);color:#fff}
+.tbtn.sp:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,107,53,.3)}
+.tbtn.rs{background:var(--sf2);border:1px solid var(--bd2);color:var(--mu)}.tbtn.rs:hover{color:var(--tx)}
+.spick select{width:100%;background:var(--sf2);border:1px solid var(--bd2);color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:12px;padding:10px 14px;border-radius:var(--r);outline:none;cursor:pointer;margin-top:16px}
+.spick select:focus{border-color:var(--ac)}
+.tstat{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px;margin-bottom:14px}
+.tstat h3{font-size:13px;font-weight:700;margin-bottom:12px}
+.tsgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tsi{background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:10px;text-align:center}
+.tsv{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--ac)}.tslb{font-size:9px;color:var(--mu);margin-top:2px}
+.slog{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px}
+.slog h3{font-size:13px;font-weight:700;margin-bottom:10px}
+.lempty{font-size:12px;color:var(--mu);font-family:'JetBrains Mono',monospace;text-align:center;padding:16px 0}
+.litem{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--bd);font-size:11px}
+.litem:last-child{border-bottom:none}.lname{color:var(--tx);font-weight:600;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lmeta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu)}.ldur{color:var(--a2);font-weight:700}
+.chart{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px;margin-top:14px}
+.chart h3{font-size:13px;font-weight:700;margin-bottom:10px}
+.goalline{font-size:9px;color:var(--ac);font-family:'JetBrains Mono',monospace;text-align:right;margin-bottom:6px;border-top:1px dashed rgba(0,212,255,.2);padding-top:3px}
+.bchart{display:flex;align-items:flex-end;gap:3px;height:70px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.bar{width:100%;border-radius:3px 3px 0 0;min-height:2px;transition:height .4s}
+.blbl{font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--mu)}.bval{font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--a2)}
+/* FLASHCARDS */
+.fclayout{display:grid;grid-template-columns:200px 1fr;gap:20px}
+.fccats{display:flex;flex-direction:column;gap:5px}
+.fccat{padding:9px 13px;border-radius:var(--r);border:1px solid var(--bd);background:var(--sf);cursor:pointer;font-size:12px;font-weight:600;color:var(--mu);transition:all .15s;text-align:left}
+.fccat:hover{border-color:var(--bd2);color:var(--tx)}.fccat.active{background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.3);color:var(--ac)}
+.fccb{float:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu);background:var(--bd2);padding:1px 6px;border-radius:10px}
+.fcsr{display:flex;gap:8px;margin-bottom:16px}
+.fcs{flex:1;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:10px;text-align:center}
+.fcsv{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700}.fcsl{font-size:9px;color:var(--mu);margin-top:2px}
+.fcs.kn .fcsv{color:var(--a2)}.fcs.dn .fcsv{color:var(--a3)}.fcs.pc .fcsv{color:var(--ac)}
+.cwrap{perspective:1000px;height:250px;margin-bottom:14px;cursor:pointer}
+.cinner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.cwrap.flipped .cinner{transform:rotateY(180deg)}
+.cfront,.cback{position:absolute;inset:0;border-radius:var(--rlg);backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px;text-align:center}
+.cfront{background:var(--sf);border:1px solid var(--bd)}
+.cback{background:linear-gradient(135deg,rgba(0,212,255,.06),rgba(0,255,157,.04));border:1px solid rgba(0,212,255,.25);transform:rotateY(180deg)}
+.ccat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ac);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.cdiff{display:flex;gap:3px;margin-bottom:10px}
+.ddot{width:7px;height:7px;border-radius:50%;background:var(--bd2)}
+.ddot.e{background:var(--a2)}.ddot.m{background:var(--a5)}.ddot.h{background:var(--a3)}
+.cq{font-size:17px;font-weight:700;color:var(--tx);line-height:1.4}
+.ca{font-size:13px;color:var(--tx);line-height:1.6}
+.chint{font-size:10px;color:var(--mu);margin-top:10px;font-family:'JetBrains Mono',monospace}
+.fcnav{display:flex;gap:8px;justify-content:center;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.fcb{padding:9px 18px;border-radius:var(--r);border:1px solid var(--bd2);background:var(--sf2);color:var(--tx);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.fcb:hover{border-color:var(--ac);color:var(--ac)}.fcb.fl{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--ac)}
+.fcb.kn{background:rgba(0,255,157,.08);border-color:rgba(0,255,157,.3);color:var(--a2)}
+.fcb.dn{background:rgba(255,107,53,.08);border-color:rgba(255,107,53,.3);color:var(--a3)}
+/* RESOURCES */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:24px}
+.rc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:13px 15px;text-decoration:none;transition:all .2s;display:block}
+.rc:hover{border-color:var(--bd2);transform:translateY(-2px)}.rn{font-size:12px;font-weight:700;color:var(--tx);margin-bottom:2px}
+.ru{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--ac)}.rd{font-size:10px;color:var(--mu);margin-top:3px;line-height:1.4}
+.rtag{display:inline-block;font-size:8px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:4px;margin-top:5px;letter-spacing:.06em}
+.rtag.fr{background:rgba(0,255,157,.1);color:var(--a2)}.rtag.pd{background:rgba(255,107,53,.1);color:var(--a3)}.rtag.tl{background:rgba(0,212,255,.1);color:var(--ac)}
+.stitle{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:12px;margin-top:8px;display:flex;align-items:center;gap:8px}
+.stitle::after{content:'';flex:1;height:1px;background:var(--bd)}
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;right:0;width:270px;height:100vh;background:var(--sf);border-left:1px solid var(--bd);padding:22px 18px;overflow-y:auto;z-index:100;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.sidebar.open{transform:translateX(0)}.sov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;display:none}.sov.open{display:block}
+.scb{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--mu);cursor:pointer;font-size:15px}
+.sbt{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:14px}.pi{margin-bottom:9px}
+.pil{font-size:10px;color:var(--mu);margin-bottom:3px;display:flex;justify-content:space-between}.pil span{font-family:'JetBrains Mono',monospace;color:var(--ac)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--sf2);border:1px solid var(--bd2);color:var(--tx);padding:10px 20px;border-radius:var(--r);font-size:13px;font-weight:600;z-index:200;transition:transform .3s,opacity .3s;opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}.toast.g{border-color:rgba(0,255,157,.4);color:var(--a2)}.toast.o{border-color:rgba(255,107,53,.4);color:var(--a3)}
+@media(max-width:800px){.tlayout{grid-template-columns:1fr}.fclayout{grid-template-columns:1fr}.fccats{flex-direction:row;flex-wrap:wrap}}
+@media(max-width:700px){.drow,.dcols{grid-template-columns:80px 1fr}.drow .sess.aft{display:none}.dcols .colh:last-child{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nb">CyberPath</div>
+  <div class="nts">
+    <button class="nt active" onclick="goPage('roadmap')">📍 Roadmap</button>
+    <button class="nt" onclick="goPage('timer')">⏱ Study Timer</button>
+    <button class="nt" onclick="goPage('flashcards')">🃏 Flashcards</button>
+    <button class="nt" onclick="goPage('resources')">🔗 Resources</button>
+  </div>
+  <div class="nr">
+    <div class="stb">🔥 <span id="nst">0</span>d</div>
+    <div class="xpb">⚡ <span id="nxp">0</span> XP</div>
+  </div>
+</nav>
+
+<!-- ROADMAP -->
+<div class="page active" id="page-roadmap">
+  <div class="hero">
+    <div class="htag">CYBERSEC CAREER ROADMAP · NEWCASTLE AU</div>
+    <h1>Your Path to <span>Cyber</span>security</h1>
+    <div class="hsub">// Started: Tue Apr 29, 2025 · Target: First job by Sep 2025</div>
+    <div class="sg">
+      <div class="sc"><div class="sv" id="sw">24</div><div class="sl">Weeks</div></div>
+      <div class="sc"><div class="sv g" id="sd">0</div><div class="sl">Days Done</div></div>
+      <div class="sc"><div class="sv" id="sp">0%</div><div class="sl">Complete</div></div>
+      <div class="sc"><div class="sv o" id="ss">0</div><div class="sl">Day Streak</div></div>
+      <div class="sc"><div class="sv y" id="sx">0</div><div class="sl">XP Earned</div></div>
+    </div>
+  </div>
+  <div class="lvc" id="lvc">
+    <div class="lvi" id="lvi">🌱</div>
+    <div style="flex:1">
+      <div class="lvn" id="lvn">Script Kiddie</div>
+      <div class="lvd" id="lvd">Just starting. Keep going!</div>
+      <div class="lvb"><div class="lvf" id="lvf" style="width:0%"></div></div>
+      <div class="lvx" id="lvx">0 / 100 XP</div>
+    </div>
+  </div>
+  <div class="pw"><div class="ph"><span class="pt">Overall Progress</span><span class="pp" id="opct">0%</span></div><div class="track"><div class="fill" id="ofill" style="width:0%"></div></div></div>
+  <div class="br">
+    <button class="btn" onclick="toggleSidebar()">📊 Progress</button>
+    <button class="smb" id="exb" onclick="toggleExpandAll()">Expand all weeks</button>
+    <button class="btn a" onclick="goPage('timer')">⏱ Start Studying</button>
+    <button class="btn" onclick="goPage('flashcards')">🃏 Practice Interview</button>
+  </div>
+  <div class="ptabs">
+    <button class="ptab p0 active" onclick="showPhase(0)"><span class="tnum">1</span><span>Foundation<br><small style="font-weight:400;font-size:10px;opacity:.7">Wks 1–8</small></span></button>
+    <button class="ptab p1" onclick="showPhase(1)"><span class="tnum">2</span><span>Certification<br><small style="font-weight:400;font-size:10px;opacity:.7">Wks 9–12</small></span></button>
+    <button class="ptab p2" onclick="showPhase(2)"><span class="tnum">3</span><span>Land the Job<br><small style="font-weight:400;font-size:10px;opacity:.7">Wks 13–24</small></span></button>
+  </div>
+  <div class="psec active" id="phase-0"><div class="pshdr"><h2>Phase 1: Foundation</h2><p>Apr 29 – Jun 22 · Build your core offensive skills</p></div><div id="wp0"></div><div class="milestone"><div class="mi-icon">🎯</div><div><div class="mi-title">Phase 1 Goal</div><div class="mi-text">30+ Portswigger labs · Jr Pen Tester on TryHackMe · 1 bug bounty report · GitHub portfolio live · 70%+ Security+ practice exam</div></div></div></div>
+  <div class="psec" id="phase-1"><div class="pshdr"><h2>Phase 2: Security+ Certification</h2><p>Jun 23 – Jul 20 · Get certified, start applying</p></div><div id="wp1"></div><div class="milestone"><div class="mi-icon">🏆</div><div><div class="mi-title">Phase 2 Goal</div><div class="mi-text">Pass CompTIA Security+ · 20+ job applications · At least 1 interview booked · Splunk fundamentals done · SOC Level 1 complete</div></div></div></div>
+  <div class="psec" id="phase-2"><div class="pshdr"><h2>Phase 3: Land the Job + OSCP Prep</h2><p>Jul 21 onwards</p></div>
+    <div class="p3b"><div class="wr">WEEKS 13–16</div><h3>Active Interviewing</h3><p>Morning: Interview prep, practice technical questions out loud.<br>Afternoon: HTB medium/hard machines, active bug bounty.<br>Weekend: BSides, AISA, LinkedIn — Leidos, BAE Systems, Newcastle MSPs.</p></div>
+    <div class="p3b"><div class="wr">WEEKS 17–20</div><h3>Once You Land the Job</h3><p>Absorb everything at work. Outside: 1hr OSCP prep (TJ Null HTB list). Weekend: 1 machine/day + Portswigger practitioner labs.</p></div>
+    <div class="p3b"><div class="wr">WEEKS 21–24</div><h3>OSCP Exam Window</h3><p>Buy PEN-200 when HTB mediums feel comfortable without hints. 90-day labs. Sit exam ~month 6. OSCP + experience = you name your next role.</p></div>
+    <div class="milestone"><div class="mi-icon">🚀</div><div><div class="mi-title">Phase 3 Goal</div><div class="mi-text">Employed in Newcastle cybersecurity · OSCP in progress · Bug bounty earning · Senior pentester path in 2–3 years</div></div></div></div>
+</div>
+
+<!-- TIMER -->
+<div class="page" id="page-timer">
+  <h1 style="margin-bottom:8px;">Study <span>Timer</span></h1>
+  <p style="color:var(--mu);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:24px;">// Track every session. Build the habit. Watch the hours stack up.</p>
+  <div class="tlayout">
+    <div>
+      <div class="tcard">
+        <div class="tlbl">CURRENT SESSION</div>
+        <div class="tsname" id="tsn">Select a topic to begin</div>
+        <div class="tdisplay" id="tdisp">00:00:00</div>
+        <div class="tbtns">
+          <button class="tbtn st" id="tbst" onclick="timerStart()">▶ START</button>
+          <button class="tbtn sp" id="tbsp" onclick="timerStop()" style="display:none">■ STOP &amp; SAVE</button>
+          <button class="tbtn rs" onclick="timerReset()">↺ RESET</button>
+        </div>
+        <div class="spick">
+          <select id="ssel" onchange="sessChanged()">
+            <option value="">— Pick what you're studying —</option>
+            <option>Linux CLI / Bandit</option><option>Networking Fundamentals</option>
+            <option>Portswigger Web Academy</option><option>TryHackMe</option>
+            <option>HackTheBox</option><option>Bug Bounty</option>
+            <option>Burp Suite Practice</option><option>API Hacking</option>
+            <option>Mobile Pentesting</option><option>Security+ Study</option>
+            <option>Security+ Practice Exam</option><option>SIEM / Splunk</option>
+            <option>Interview Prep</option><option>Report Writing</option>
+            <option>Job Applications</option><option>Flashcard Review</option>
+            <option>Other / General</option>
+          </select>
+        </div>
+      </div>
+      <div class="chart">
+        <h3>Study Hours — Last 14 Days</h3>
+        <div class="goalline">Goal: 3 hrs/day</div>
+        <div class="bchart" id="bcht"></div>
+      </div>
+    </div>
+    <div>
+      <div class="tstat">
+        <h3>📅 Today</h3>
+        <div class="tsgrid">
+          <div class="tsi"><div class="tsv" id="thr">0h 0m</div><div class="tslb">Studied Today</div></div>
+          <div class="tsi"><div class="tsv" id="tses" style="color:var(--a4)">0</div><div class="tslb">Sessions</div></div>
+          <div class="tsi"><div class="tsv" id="tall" style="color:var(--a5)">0h</div><div class="tslb">All-Time Total</div></div>
+          <div class="tsi"><div class="tsv" id="tavg" style="color:var(--a3)">0h</div><div class="tslb">Daily Average</div></div>
+        </div>
+      </div>
+      <div class="slog">
+        <h3>📋 Session Log</h3>
+        <div id="loglist"><div class="lempty">No sessions yet today.<br>Hit START above!</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="page" id="page-flashcards">
+  <h1 style="margin-bottom:8px;">Interview <span>Flashcards</span></h1>
+  <p style="color:var(--mu);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:16px;">// 60 real interview questions. Click to flip. Mark what you know.</p>
+  <div class="fcsr">
+    <div class="fcs kn"><div class="fcsv" id="fck">0</div><div class="fcsl">Knew It ✓</div></div>
+    <div class="fcs dn"><div class="fcsv" id="fcd">0</div><div class="fcsl">Need Work ✗</div></div>
+    <div class="fcs pc"><div class="fcsv" id="fcp">—</div><div class="fcsl">Score</div></div>
+    <div class="fcs"><div class="fcsv" id="fcl" style="color:var(--mu)">0</div><div class="fcsl">Remaining</div></div>
+  </div>
+  <div class="fclayout">
+    <div><div style="font-size:10px;color:var(--mu);font-family:'JetBrains Mono',monospace;margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;">Categories</div><div class="fccats" id="fccats"></div></div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+        <div style="font-size:15px;font-weight:700" id="fctitle">All Questions</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mu)" id="fcctr">Card 1</div>
+      </div>
+      <div class="cwrap" id="cwrap" onclick="flipCard()">
+        <div class="cinner" id="cinner">
+          <div class="cfront"><div class="ccat" id="ccat">—</div><div class="cdiff" id="cdiff"></div><div class="cq" id="cq">Select a category to begin</div><div class="chint">Click card to reveal answer</div></div>
+          <div class="cback"><div class="ccat" id="ccatb">—</div><div class="ca" id="ca">—</div></div>
+        </div>
+      </div>
+      <div class="fcnav">
+        <button class="fcb" onclick="prevCard()">← Prev</button>
+        <button class="fcb fl" onclick="flipCard()">↻ Flip</button>
+        <button class="fcb kn" onclick="markCard(true)">✓ Knew It</button>
+        <button class="fcb dn" onclick="markCard(false)">✗ Still Learning</button>
+        <button class="fcb" onclick="nextCard()">Next →</button>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn" onclick="shuffleDeck()">🔀 Shuffle</button>
+        <button class="btn o" onclick="resetFC()">↺ Reset Score</button>
+        <button class="btn g" onclick="weakOnly()">⚡ Weak Cards Only</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES -->
+<div class="page" id="page-resources">
+  <h1 style="margin-bottom:8px;">Study <span>Resources</span></h1>
+  <p style="color:var(--mu);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:24px;">// Everything you need. Mostly free. In the right order.</p>
+  <div class="stitle">🎯 Core Learning — Free</div>
+  <div class="rgrid">
+    <a href="https://portswigger.net/web-security" target="_blank" class="rc"><div class="rn">Portswigger Web Academy</div><div class="ru">portswigger.net/web-security</div><div class="rd">Your #1 resource. 200+ free web hacking labs. Open every morning.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://tryhackme.com" target="_blank" class="rc"><div class="rn">TryHackMe</div><div class="ru">tryhackme.com</div><div class="rd">Guided paths — Jr Pen Tester, SOC Level 1, Pre-Security.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://hackthebox.com" target="_blank" class="rc"><div class="rn">HackTheBox</div><div class="ru">hackthebox.com</div><div class="rd">Real machines. Starting Point → Easy → Medium. Portfolio builder.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://overthewire.org/wargames/bandit" target="_blank" class="rc"><div class="rn">OverTheWire: Bandit</div><div class="ru">overthewire.org</div><div class="rd">Linux CLI through 33 wargame levels. Week 1 priority.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://professormesser.com" target="_blank" class="rc"><div class="rn">Professor Messer</div><div class="ru">professormesser.com</div><div class="rd">Free Security+ video course. Best cert prep available for free.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://splunk.com/en_us/training/free-courses.html" target="_blank" class="rc"><div class="rn">Splunk Free Training</div><div class="ru">splunk.com</div><div class="rd">SIEM fundamentals. Essential for every SOC role application.</div><span class="rtag fr">FREE</span></a>
+  </div>
+  <div class="stitle">💰 Worth Paying For</div>
+  <div class="rgrid">
+    <a href="https://udemy.com" target="_blank" class="rc"><div class="rn">Jason Dion — Security+</div><div class="ru">udemy.com</div><div class="rd">Practice exams only (~$15 on sale). 6 full exams. Buy on Udemy sale day.</div><span class="rtag pd">~$15 AUD</span></a>
+    <a href="https://hackthebox.com" target="_blank" class="rc"><div class="rn">HTB VIP</div><div class="ru">hackthebox.com</div><div class="rd">Access retired machines with writeups. ~$14/month. Needed for OSCP prep.</div><span class="rtag pd">$14/mo</span></a>
+    <a href="https://offensive-security.com" target="_blank" class="rc"><div class="rn">OSCP (PEN-200)</div><div class="ru">offensive-security.com</div><div class="rd">Buy ONLY after HTB mediums without hints. Month 5–6 target.</div><span class="rtag pd">~$1,499</span></a>
+  </div>
+  <div class="stitle">🛠️ Tools</div>
+  <div class="rgrid">
+    <a href="https://portswigger.net/burp" target="_blank" class="rc"><div class="rn">Burp Suite Community</div><div class="ru">portswigger.net/burp</div><div class="rd">Your main web proxy. Free edition is enough to start. Learn every feature.</div><span class="rtag tl">TOOL</span></a>
+    <a href="https://github.com/skylot/jadx" target="_blank" class="rc"><div class="rn">JADX</div><div class="ru">github.com/skylot/jadx</div><div class="rd">APK decompiler for Android app analysis. Essential for mobile testing.</div><span class="rtag tl">TOOL</span></a>
+    <a href="https://nmap.org" target="_blank" class="rc"><div class="rn">Nmap</div><div class="ru">nmap.org</div><div class="rd">Learn every flag. Essential for HTB and OSCP. Know -sC -sV -A -p-.</div><span class="rtag tl">TOOL</span></a>
+    <a href="https://genymotion.com" target="_blank" class="rc"><div class="rn">Genymotion</div><div class="ru">genymotion.com</div><div class="rd">Android emulator for mobile pentesting. Free personal edition works.</div><span class="rtag tl">TOOL</span></a>
+  </div>
+  <div class="stitle">📖 Must-Read</div>
+  <div class="rgrid">
+    <a href="https://owasp.org/www-project-top-ten" target="_blank" class="rc"><div class="rn">OWASP Top 10</div><div class="ru">owasp.org</div><div class="rd">Memorise all 10. Every interviewer will ask about at least 3 of these.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://owasp.org/www-project-api-security" target="_blank" class="rc"><div class="rn">OWASP API Top 10</div><div class="ru">owasp.org</div><div class="rd">APIs are everywhere. Know these before your first bug bounty submission.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://mas.owasp.org" target="_blank" class="rc"><div class="rn">OWASP MASTG</div><div class="ru">mas.owasp.org</div><div class="rd">Mobile Application Security Testing Guide. Bible for mobile pentesting.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://hackerone.com/hacktivity" target="_blank" class="rc"><div class="rn">HackerOne Hacktivity</div><div class="ru">hackerone.com</div><div class="rd">Disclosed bug bounty reports. Read 5 per week. Best free education that exists.</div><span class="rtag fr">FREE</span></a>
+    <a href="https://github.com/juliocesarfort/public-pentesting-reports" target="_blank" class="rc"><div class="rn">Public Pentest Reports</div><div class="ru">github.com</div><div class="rd">Real pentest reports. Study the format. Template your own writeups from these.</div><span class="rtag fr">FREE</span></a>
+  </div>
+  <div class="stitle">🏢 Newcastle Jobs</div>
+  <div class="rgrid">
+    <a href="https://seek.com.au/jobs?keywords=cyber+security&location=Newcastle" target="_blank" class="rc"><div class="rn">Seek — Newcastle Cyber</div><div class="ru">seek.com.au</div><div class="rd">Set up alerts: SOC analyst, junior pentester, security analyst. Check daily.</div><span class="rtag tl">JOBS</span></a>
+    <a href="https://linkedin.com/jobs" target="_blank" class="rc"><div class="rn">LinkedIn Jobs</div><div class="ru">linkedin.com</div><div class="rd">Connect with AU security pros. Join AISA, AusCERT groups. Remote roles here.</div><span class="rtag tl">JOBS</span></a>
+    <a href="https://bsidesau.com.au" target="_blank" class="rc"><div class="rn">BSides Australia</div><div class="ru">bsidesau.com.au</div><div class="rd">Security conferences. Attend for networking. Job leads come from conversations.</div><span class="rtag fr">FREE</span></a>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sov" id="sov" onclick="toggleSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <button class="scb" onclick="toggleSidebar()">✕</button>
+  <div class="sbt">Progress Breakdown</div>
+  <div id="sbcontent"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WKS=[
+  {ph:0,wk:1,dt:"Apr 29–May 4",fo:"Linux CLI + Networking basics",cur:true,days:[
+    {n:"Tuesday",d:"Apr 29",m:{t:"Linux CLI",x:"OverTheWire Bandit L0–5",u:"https://overthewire.org/wargames/bandit"},a:{t:"Networking",x:"Professor Messer videos Ep 1–3",u:"https://professormesser.com"}},
+    {n:"Wednesday",d:"Apr 30",m:{t:"Linux CLI",x:"Bandit L6–12",u:"https://overthewire.org/wargames/bandit"},a:{t:"Networking",x:"TCP/IP, DNS, HTTP — Messer Ep 4–6",u:"https://professormesser.com"}},
+    {n:"Thursday",d:"May 1",m:{t:"Linux CLI",x:"Bandit L13–20",u:"https://overthewire.org/wargames/bandit"},a:{t:"TryHackMe",x:"Pre-Security path — start",u:"https://tryhackme.com"}},
+    {n:"Friday",d:"May 2",m:{t:"Linux CLI",x:"Bandit L21–27",u:"https://overthewire.org/wargames/bandit"},a:{t:"TryHackMe",x:"Pre-Security path — continue",u:"https://tryhackme.com"}},
+    {n:"Saturday",d:"May 3",m:{t:"Review",x:"Review all Bandit levels, note commands",u:""},a:{t:"TryHackMe",x:"Finish Pre-Security path",u:"https://tryhackme.com"}},
+    {n:"Sunday",d:"May 4",rest:true}
+  ]},
+  {ph:0,wk:2,dt:"May 5–11",fo:"Web hacking — SQL injection + Authentication",days:[
+    {n:"Monday",d:"May 5",m:{t:"Portswigger",x:"SQL injection — apprentice labs",u:"https://portswigger.net/web-security/sql-injection"},a:{t:"TryHackMe",x:"Jr Penetration Tester path — start",u:"https://tryhackme.com"}},
+    {n:"Tuesday",d:"May 6",m:{t:"Portswigger",x:"SQL injection — blind SQLi labs",u:"https://portswigger.net/web-security/sql-injection"},a:{t:"TryHackMe",x:"Jr Pen Tester — continue",u:"https://tryhackme.com"}},
+    {n:"Wednesday",d:"May 7",m:{t:"Portswigger",x:"Authentication vulnerabilities labs",u:"https://portswigger.net/web-security/authentication"},a:{t:"TryHackMe",x:"Jr Pen Tester — continue",u:"https://tryhackme.com"}},
+    {n:"Thursday",d:"May 8",m:{t:"Portswigger",x:"Path traversal + Command injection",u:"https://portswigger.net/web-security"},a:{t:"Reading",x:"PortSwigger blog — 1 research article",u:"https://portswigger.net/research"}},
+    {n:"Friday",d:"May 9",m:{t:"Portswigger",x:"XSS — reflected + stored + DOM labs",u:"https://portswigger.net/web-security/cross-site-scripting"},a:{t:"HackerOne",x:"Create account, read 5 disclosed reports",u:"https://hackerone.com/hacktivity"}},
+    {n:"Saturday",d:"May 10",m:{t:"Catch up",x:"Redo any labs you struggled with",u:""},a:{t:"Bug bounty",x:"Read 5 beginner writeups on Medium",u:"https://medium.com/tag/bug-bounty"}},
+    {n:"Sunday",d:"May 11",rest:true}
+  ]},
+  {ph:0,wk:3,dt:"May 12–18",fo:"CSRF, SSRF, IDOR, Access Control",days:[
+    {n:"Monday",d:"May 12",m:{t:"Portswigger",x:"CSRF labs — all apprentice level",u:"https://portswigger.net/web-security/csrf"},a:{t:"TryHackMe",x:"Jr Pen Tester — web hacking section",u:"https://tryhackme.com"}},
+    {n:"Tuesday",d:"May 13",m:{t:"Portswigger",x:"SSRF labs",u:"https://portswigger.net/web-security/ssrf"},a:{t:"Practice",x:"Revisit SQL injection — practitioner labs",u:"https://portswigger.net/web-security/sql-injection"}},
+    {n:"Wednesday",d:"May 14",m:{t:"Portswigger",x:"Access control / IDOR labs",u:"https://portswigger.net/web-security/access-control"},a:{t:"HackerOne",x:"Find program with good scope, read policy",u:"https://hackerone.com"}},
+    {n:"Thursday",d:"May 15",m:{t:"Portswigger",x:"XXE injection labs",u:"https://portswigger.net/web-security/xxe"},a:{t:"Notes",x:"Write notes on all vulns learned this week",u:""}},
+    {n:"Friday",d:"May 16",m:{t:"Portswigger",x:"Clickjacking labs",u:"https://portswigger.net/web-security/clickjacking"},a:{t:"TryHackMe",x:"Complete Jr Pen Tester path",u:"https://tryhackme.com"}},
+    {n:"Saturday",d:"May 17",m:{t:"HackTheBox",x:"Create account — Starting Point Tier 0",u:"https://hackthebox.com"},a:{t:"Review",x:"Weekly review — what was hardest?",u:""}},
+    {n:"Sunday",d:"May 18",rest:true}
+  ]},
+  {ph:0,wk:4,dt:"May 19–25",fo:"HackTheBox Starting Point + First bug bounty",days:[
+    {n:"Monday",d:"May 19",m:{t:"HackTheBox",x:"Starting Point Tier 0 machines",u:"https://hackthebox.com"},a:{t:"Bug bounty",x:"Pick first HackerOne target — recon only",u:"https://hackerone.com"}},
+    {n:"Tuesday",d:"May 20",m:{t:"HackTheBox",x:"Starting Point Tier 1",u:"https://hackthebox.com"},a:{t:"Tools",x:"Subdomain enum, set up Burp Suite",u:"https://portswigger.net/burp"}},
+    {n:"Wednesday",d:"May 21",m:{t:"Portswigger",x:"HTTP request smuggling intro labs",u:"https://portswigger.net/web-security/request-smuggling"},a:{t:"Bug bounty",x:"Test target — run OWASP Top 10 checklist",u:""}},
+    {n:"Thursday",d:"May 22",m:{t:"HackTheBox",x:"Starting Point Tier 2",u:"https://hackthebox.com"},a:{t:"Bug bounty",x:"Document findings, write draft report",u:""}},
+    {n:"Friday",d:"May 23",m:{t:"Portswigger",x:"Business logic vulnerabilities labs",u:"https://portswigger.net/web-security/logic-flaws"},a:{t:"GitHub",x:"Create account — push first writeup/notes",u:"https://github.com"}},
+    {n:"Saturday",d:"May 24",m:{t:"Catch up",x:"Finish any outstanding labs",u:""},a:{t:"Review",x:"What topics need more depth next week?",u:""}},
+    {n:"Sunday",d:"May 25",rest:true}
+  ]},
+  {ph:0,wk:5,dt:"May 26–Jun 1",fo:"Burp Suite mastery + HTB easy machines",days:[
+    {n:"Monday",d:"May 26",m:{t:"Burp Suite",x:"Portswigger Burp Suite essentials course",u:"https://portswigger.net/web-security/burp-suite"},a:{t:"HackTheBox",x:"Easy Linux machine — full walkthrough",u:"https://hackthebox.com"}},
+    {n:"Tuesday",d:"May 27",m:{t:"Burp Suite",x:"Intruder, Repeater, Scanner deep practice",u:""},a:{t:"Bug bounty",x:"Submit first report (even low/info severity)",u:"https://hackerone.com"}},
+    {n:"Wednesday",d:"May 28",m:{t:"Portswigger",x:"Web cache poisoning labs",u:"https://portswigger.net/web-security/web-cache-poisoning"},a:{t:"HackTheBox",x:"Easy Windows machine",u:"https://hackthebox.com"}},
+    {n:"Thursday",d:"May 29",m:{t:"Portswigger",x:"JWT attacks labs",u:"https://portswigger.net/web-security/jwt"},a:{t:"Bug bounty",x:"New target — API-focused program",u:"https://hackerone.com"}},
+    {n:"Friday",d:"May 30",m:{t:"Portswigger",x:"OAuth vulnerabilities labs",u:"https://portswigger.net/web-security/oauth"},a:{t:"Writing",x:"Writeup of completed HTB machine on GitHub",u:"https://github.com"}},
+    {n:"Saturday",d:"May 31",m:{t:"HackTheBox",x:"Medium difficulty machine — attempt",u:"https://hackthebox.com"},a:{t:"Review",x:"Monthly review — skill self-assessment",u:""}},
+    {n:"Sunday",d:"Jun 1",rest:true}
+  ]},
+  {ph:0,wk:6,dt:"Jun 2–8",fo:"API hacking + Mobile pentesting intro",days:[
+    {n:"Monday",d:"Jun 2",m:{t:"API hacking",x:"OWASP API Top 10 — read all categories",u:"https://owasp.org/www-project-api-security"},a:{t:"TryHackMe",x:"API pentesting room",u:"https://tryhackme.com"}},
+    {n:"Tuesday",d:"Jun 3",m:{t:"Portswigger",x:"GraphQL API vulnerabilities labs",u:"https://portswigger.net/web-security/graphql"},a:{t:"Bug bounty",x:"Target an API-heavy program",u:"https://hackerone.com"}},
+    {n:"Wednesday",d:"Jun 4",m:{t:"Mobile intro",x:"Read OWASP MASTG — mobile fundamentals",u:"https://mas.owasp.org"},a:{t:"Setup",x:"Install Android Studio + Genymotion emulator",u:"https://genymotion.com"}},
+    {n:"Thursday",d:"Jun 5",m:{t:"Mobile",x:"Intercept Android traffic with Burp Suite",u:"https://portswigger.net/burp"},a:{t:"TryHackMe",x:"Android hacking intro room",u:"https://tryhackme.com"}},
+    {n:"Friday",d:"Jun 6",m:{t:"Mobile",x:"APK analysis basics — jadx decompiler",u:"https://github.com/skylot/jadx"},a:{t:"Bug bounty",x:"Mobile app program on HackerOne — recon",u:"https://hackerone.com"}},
+    {n:"Saturday",d:"Jun 7",m:{t:"Catch up",x:"Finish anything outstanding from week",u:""},a:{t:"Review",x:"Document all tools learned so far",u:""}},
+    {n:"Sunday",d:"Jun 8",rest:true}
+  ]},
+  {ph:0,wk:7,dt:"Jun 9–15",fo:"Report writing + Job prep begins",days:[
+    {n:"Monday",d:"Jun 9",m:{t:"Report writing",x:"Read sample pentest reports on GitHub",u:"https://github.com/juliocesarfort/public-pentesting-reports"},a:{t:"HackTheBox",x:"Write a full professional report for a machine",u:""}},
+    {n:"Tuesday",d:"Jun 10",m:{t:"Portswigger",x:"Prototype pollution labs",u:"https://portswigger.net/web-security/prototype-pollution"},a:{t:"LinkedIn",x:"Set up LinkedIn — add skills, connect with AU security pros",u:"https://linkedin.com"}},
+    {n:"Wednesday",d:"Jun 11",m:{t:"HackTheBox",x:"Medium machine — document every step",u:"https://hackthebox.com"},a:{t:"Resume",x:"Draft cybersecurity resume — first version",u:""}},
+    {n:"Thursday",d:"Jun 12",m:{t:"Bug bounty",x:"Active testing session — 2 hrs on target",u:"https://hackerone.com"},a:{t:"Research",x:"List Newcastle/Hunter security employers on Seek",u:"https://seek.com.au"}},
+    {n:"Friday",d:"Jun 13",m:{t:"Portswigger",x:"Deserialization vulnerabilities labs",u:"https://portswigger.net/web-security/deserialization"},a:{t:"Portfolio",x:"Polish GitHub — pin repos, write README files",u:"https://github.com"}},
+    {n:"Saturday",d:"Jun 14",m:{t:"Practice exam",x:"Security+ Dion practice test — first attempt",u:"https://udemy.com"},a:{t:"Review score",x:"Note weak domains for Phase 2 focus",u:""}},
+    {n:"Sunday",d:"Jun 15",rest:true}
+  ]},
+  {ph:0,wk:8,dt:"Jun 16–22",fo:"Phase 1 wrap-up + Security+ preview",days:[
+    {n:"Monday",d:"Jun 16",m:{t:"Portswigger",x:"File upload vulnerabilities labs",u:"https://portswigger.net/web-security/file-upload"},a:{t:"Security+",x:"Messer — Threats, Attacks, Vulnerabilities domain",u:"https://professormesser.com"}},
+    {n:"Tuesday",d:"Jun 17",m:{t:"HackTheBox",x:"New easy machine — no hints allowed",u:"https://hackthebox.com"},a:{t:"Security+",x:"Architecture and Design domain",u:"https://professormesser.com"}},
+    {n:"Wednesday",d:"Jun 18",m:{t:"Bug bounty",x:"Active session — full recon to report",u:"https://hackerone.com"},a:{t:"Security+",x:"Implementation domain videos",u:"https://professormesser.com"}},
+    {n:"Thursday",d:"Jun 19",m:{t:"Portswigger",x:"Any remaining apprentice-level labs",u:"https://portswigger.net/web-security"},a:{t:"Security+",x:"Operations and IR domain",u:"https://professormesser.com"}},
+    {n:"Friday",d:"Jun 20",m:{t:"Phase 1 review",x:"Self-assessment — what can you do now?",u:""},a:{t:"Security+",x:"Governance, Risk, Compliance domain",u:"https://professormesser.com"}},
+    {n:"Saturday",d:"Jun 21",m:{t:"Practice exam",x:"Dion Security+ — full timed exam conditions",u:"https://udemy.com"},a:{t:"Plan",x:"Review score, adjust Phase 2 study focus",u:""}},
+    {n:"Sunday",d:"Jun 22",rest:true}
+  ]},
+  {ph:1,wk:9,dt:"Jun 23–29",fo:"Security+ full study blitz",days:[
+    {n:"Monday",d:"Jun 23",m:{t:"Security+",x:"Messer — Domain 1 deep dive review",u:"https://professormesser.com"},a:{t:"Dion practice",x:"Domain 1 quiz — target 80%+",u:"https://udemy.com"}},
+    {n:"Tuesday",d:"Jun 24",m:{t:"Security+",x:"Domain 2 — Architecture and Design",u:"https://professormesser.com"},a:{t:"HackTheBox",x:"Keep skills sharp — 1 hr active hacking",u:"https://hackthebox.com"}},
+    {n:"Wednesday",d:"Jun 25",m:{t:"Security+",x:"Domain 3 — Implementation",u:"https://professormesser.com"},a:{t:"Dion practice",x:"Domain 2+3 quiz",u:"https://udemy.com"}},
+    {n:"Thursday",d:"Jun 26",m:{t:"Security+",x:"Domain 4 — Operations and IR",u:"https://professormesser.com"},a:{t:"Bug bounty",x:"Active testing session",u:"https://hackerone.com"}},
+    {n:"Friday",d:"Jun 27",m:{t:"Security+",x:"Domain 5 — Governance, Risk, Compliance",u:"https://professormesser.com"},a:{t:"Dion practice",x:"Full practice exam #2 — timed",u:"https://udemy.com"}},
+    {n:"Saturday",d:"Jun 28",m:{t:"Full exam",x:"Dion — timed, exam conditions, review wrong answers",u:"https://udemy.com"},a:{t:"Weak areas",x:"Extra study on lowest scoring domains",u:""}},
+    {n:"Sunday",d:"Jun 29",rest:true}
+  ]},
+  {ph:1,wk:10,dt:"Jun 30–Jul 6",fo:"Sit Security+ exam + start applying",days:[
+    {n:"Monday",d:"Jun 30",m:{t:"Security+",x:"Final review — flashcards, Messer practice Qs",u:"https://professormesser.com"},a:{t:"Job search",x:"Find all security roles Newcastle/Hunter on Seek",u:"https://seek.com.au"}},
+    {n:"Tuesday",d:"Jul 1",m:{t:"Security+",x:"Last practice exam — target 85%+",u:"https://udemy.com"},a:{t:"Resume",x:"Tailor resume for SOC analyst roles",u:""}},
+    {n:"Wednesday",d:"Jul 2",m:{t:"Security+",x:"Light review only — rest your brain",u:""},a:{t:"Applications",x:"Apply to 3 roles on Seek/LinkedIn",u:"https://seek.com.au"}},
+    {n:"Thursday",d:"Jul 3",m:{t:"SIT EXAM",x:"CompTIA Security+ — book and sit it today",u:"https://comptia.org"},a:{t:"Celebrate",x:"You earned it. Take the afternoon off.",u:""}},
+    {n:"Friday",d:"Jul 4",m:{t:"HackTheBox",x:"Back to hacking — medium machine",u:"https://hackthebox.com"},a:{t:"Applications",x:"Apply to 3 more roles on LinkedIn",u:"https://linkedin.com"}},
+    {n:"Saturday",d:"Jul 5",m:{t:"Bug bounty",x:"Active session — submit any findings",u:"https://hackerone.com"},a:{t:"Networking",x:"Message 5 AU security pros on LinkedIn",u:"https://linkedin.com"}},
+    {n:"Sunday",d:"Jul 6",rest:true}
+  ]},
+  {ph:1,wk:11,dt:"Jul 7–13",fo:"SOC skills + Interview prep",days:[
+    {n:"Monday",d:"Jul 7",m:{t:"SIEM",x:"Splunk free fundamentals course — start",u:"https://splunk.com/en_us/training/free-courses.html"},a:{t:"TryHackMe",x:"SOC Level 1 path — start",u:"https://tryhackme.com"}},
+    {n:"Tuesday",d:"Jul 8",m:{t:"SIEM",x:"Splunk — searching and reporting module",u:"https://splunk.com"},a:{t:"TryHackMe",x:"SOC Level 1 — continue",u:"https://tryhackme.com"}},
+    {n:"Wednesday",d:"Jul 9",m:{t:"Interview prep",x:"Research common SOC interview questions",u:""},a:{t:"TryHackMe",x:"SOC Level 1 — continue",u:"https://tryhackme.com"}},
+    {n:"Thursday",d:"Jul 10",m:{t:"SIEM",x:"Splunk — dashboards and alerts module",u:"https://splunk.com"},a:{t:"Applications",x:"Apply to 5 more roles",u:"https://seek.com.au"}},
+    {n:"Friday",d:"Jul 11",m:{t:"Interview prep",x:"Talk through your projects out loud",u:""},a:{t:"Portfolio",x:"Add Security+ cert to LinkedIn + GitHub",u:"https://linkedin.com"}},
+    {n:"Saturday",d:"Jul 12",m:{t:"HTB / Bug bounty",x:"Keep offensive skills sharp",u:"https://hackthebox.com"},a:{t:"Review",x:"Week review — any interviews booked?",u:""}},
+    {n:"Sunday",d:"Jul 13",rest:true}
+  ]},
+  {ph:1,wk:12,dt:"Jul 14–20",fo:"Apply hard + keep hacking",days:[
+    {n:"Monday",d:"Jul 14",m:{t:"Applications",x:"10 applications this week — SOC + junior pentest",u:"https://seek.com.au"},a:{t:"Portswigger",x:"Practitioner-level labs",u:"https://portswigger.net/web-security"}},
+    {n:"Tuesday",d:"Jul 15",m:{t:"Interview prep",x:"Study: SOC workflow, triage process, common tools",u:""},a:{t:"HackTheBox",x:"Medium machine + full writeup",u:"https://hackthebox.com"}},
+    {n:"Wednesday",d:"Jul 16",m:{t:"Networking",x:"Find BSides/AISA Newcastle or Sydney meetup",u:"https://bsidesau.com.au"},a:{t:"Bug bounty",x:"Active testing session",u:"https://hackerone.com"}},
+    {n:"Thursday",d:"Jul 17",m:{t:"Applications",x:"Follow up on all applications sent so far",u:""},a:{t:"TryHackMe",x:"Finish SOC Level 1 path",u:"https://tryhackme.com"}},
+    {n:"Friday",d:"Jul 18",m:{t:"Phase review",x:"Full self-assessment — what do you know now?",u:""},a:{t:"Plan",x:"Adjust based on which interviews are coming",u:""}},
+    {n:"Saturday",d:"Jul 19",m:{t:"Mock interview",x:"Full mock interview — record yourself",u:""},a:{t:"Review",x:"Watch back, note what to improve",u:""}},
+    {n:"Sunday",d:"Jul 20",rest:true}
+  ]}
+];
+
+const CARDS=[
+  {c:"Web Security",q:"What is SQL Injection?",a:"Injecting malicious SQL into a query to manipulate the database — extract data, bypass auth, or delete records. Caused by unsanitised user input in queries.",d:"easy"},
+  {c:"Web Security",q:"What is XSS and what are the 3 types?",a:"Cross-Site Scripting — injecting malicious scripts into web pages. Types: (1) Reflected — in URL/request, (2) Stored — saved in DB served to all users, (3) DOM-based — manipulates client-side DOM without server.",d:"easy"},
+  {c:"Web Security",q:"What is CSRF and how do you prevent it?",a:"Cross-Site Request Forgery — tricks authenticated users into submitting malicious requests. Prevent with: CSRF tokens, SameSite cookies, Referer header validation.",d:"easy"},
+  {c:"Web Security",q:"What is SSRF?",a:"Server-Side Request Forgery — attacker makes the server send requests to internal systems they can't directly reach. Can expose metadata, credentials, or allow pivoting internally.",d:"med"},
+  {c:"Web Security",q:"What is IDOR?",a:"Insecure Direct Object Reference — accessing other users' data by changing a parameter (e.g. /api/user/1234 → /1235). It's an access control/authorisation failure.",d:"easy"},
+  {c:"Web Security",q:"What is XXE injection?",a:"XML External Entity — malicious XML references external files or URIs. Can read /etc/passwd, perform SSRF, or cause DoS. Prevent by disabling external entity processing in parsers.",d:"med"},
+  {c:"Web Security",q:"What is JWT and what security issues exist?",a:"JSON Web Token for stateless auth. Issues: none algorithm attack (accept unsigned tokens), weak secrets, algorithm confusion attacks, missing signature validation.",d:"med"},
+  {c:"Web Security",q:"What is a path traversal attack?",a:"Using ../ sequences to read files outside the web root — e.g. ../../../etc/passwd. Caused by insufficient input validation on file path parameters.",d:"easy"},
+  {c:"Web Security",q:"What is HTTP request smuggling?",a:"Exploiting discrepancies between how front-end and back-end servers parse HTTP requests, poisoning the request pipeline and interfering with other users' requests.",d:"hard"},
+  {c:"Web Security",q:"What is clickjacking?",a:"Embedding a transparent iframe over a legitimate page to trick users into clicking hidden buttons. Prevented with X-Frame-Options or CSP frame-ancestors header.",d:"easy"},
+  {c:"Web Security",q:"What is insecure deserialisation?",a:"Untrusted data deserialised without validation — can lead to RCE. PHP, Java, Python pickle are common targets. One of OWASP Top 10.",d:"hard"},
+  {c:"Web Security",q:"What is OAuth and what are common vulns?",a:"Open auth standard for delegated access. Vulns: open redirect in redirect_uri, CSRF on auth endpoint, stealing codes via Referer, state parameter bypass.",d:"hard"},
+  {c:"Networking",q:"What is the difference between TCP and UDP?",a:"TCP: connection-oriented, reliable, ordered, slower. UDP: connectionless, unreliable, faster, no guaranteed delivery. TCP = HTTPS. UDP = DNS, VoIP, gaming.",d:"easy"},
+  {c:"Networking",q:"What happens during a TCP 3-way handshake?",a:"SYN → SYN-ACK → ACK. Client sends SYN, server responds SYN-ACK, client confirms with ACK. Connection established. Nmap uses this for port detection.",d:"easy"},
+  {c:"Networking",q:"What is DNS and how does it work?",a:"Domain Name System — translates domain names to IPs. Client queries recursive resolver → root nameserver → TLD nameserver → authoritative nameserver → IP returned.",d:"easy"},
+  {c:"Networking",q:"What ports do common services use?",a:"HTTP=80, HTTPS=443, SSH=22, FTP=20/21, SMTP=25, DNS=53, SMB=445, RDP=3389, LDAP=389, MySQL=3306, PostgreSQL=5432",d:"easy"},
+  {c:"Networking",q:"What is ARP poisoning?",a:"Sending fake ARP replies to link the attacker's MAC with a legitimate IP — enables man-in-the-middle attacks on the local network. Detected by ARP inspection.",d:"med"},
+  {c:"Networking",q:"What is the OSI model?",a:"7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application. Remember: 'Please Do Not Throw Sausage Pizza Away' (bottom to top).",d:"easy"},
+  {c:"SOC & Blue Team",q:"What is a SIEM and what does it do?",a:"Security Information and Event Management — aggregates and correlates logs to detect threats, generate alerts, and support incident response. Examples: Splunk, Microsoft Sentinel, IBM QRadar.",d:"easy"},
+  {c:"SOC & Blue Team",q:"What is the difference between IDS and IPS?",a:"IDS (Intrusion Detection System) detects and alerts — passive. IPS blocks — active inline. IDS monitors a copy of traffic; IPS sits inline and can drop packets.",d:"easy"},
+  {c:"SOC & Blue Team",q:"What is a SOC Tier 1 analyst responsible for?",a:"First responder: monitoring SIEM alerts, triaging events, closing false positives, escalating confirmed threats to Tier 2. High volume, builds deep attacker pattern knowledge.",d:"easy"},
+  {c:"SOC & Blue Team",q:"What is the incident response lifecycle?",a:"NIST: Preparation → Detection & Analysis → Containment → Eradication → Recovery → Post-incident Activity. Also SANS PICERL: Prep, Identify, Contain, Eradicate, Recover, Lessons.",d:"med"},
+  {c:"SOC & Blue Team",q:"What is a false positive in security?",a:"Alert triggered by benign activity that appears malicious. E.g., IT team port scan triggering IDS. High false positive rates cause alert fatigue and missed real threats.",d:"easy"},
+  {c:"SOC & Blue Team",q:"What is MITRE ATT&CK?",a:"Framework of adversary tactics, techniques, and procedures (TTPs) observed in real attacks. Used to map detections, identify coverage gaps, and communicate threats consistently.",d:"med"},
+  {c:"SOC & Blue Team",q:"What is the Cyber Kill Chain?",a:"Lockheed Martin model: Reconnaissance → Weaponisation → Delivery → Exploitation → Installation → C2 → Actions on Objectives. Defenders can break the chain at any stage.",d:"med"},
+  {c:"Pentesting",q:"What are the 5 phases of penetration testing?",a:"(1) Reconnaissance/Planning, (2) Scanning/Enumeration, (3) Exploitation, (4) Post-Exploitation/Lateral Movement, (5) Reporting. Recon is the most important phase.",d:"easy"},
+  {c:"Pentesting",q:"What is privilege escalation?",a:"Moving from lower-privilege to higher-privilege — www-data → root on Linux, or user → SYSTEM on Windows. Common vectors: SUID binaries, weak sudo rules, cron jobs, kernel exploits.",d:"med"},
+  {c:"Pentesting",q:"White box vs black box vs grey box testing?",a:"White box: full access to source/architecture. Black box: no info, simulates external attacker. Grey box: some info (credentials, partial docs). Most real engagements are grey box.",d:"easy"},
+  {c:"Pentesting",q:"What is a reverse shell vs bind shell?",a:"Reverse shell: target connects back to attacker (bypasses inbound firewall). Bind shell: attacker connects to listener on target (blocked by firewalls). Reverse shells dominate in practice.",d:"med"},
+  {c:"Pentesting",q:"What tools are used for web recon?",a:"Passive: Shodan, WHOIS, Google dorks, Wayback Machine. Active: Nmap, Gobuster/Feroxbuster (dir busting), Subfinder/Amass (subdomain enum), Nikto, Burp Suite.",d:"med"},
+  {c:"Pentesting",q:"Common Linux privilege escalation methods?",a:"sudo -l, SUID binaries (find / -perm -4000), writable cron jobs, weak file permissions, kernel exploits, PATH hijacking, exposed credentials. GTFOBins is your reference.",d:"med"},
+  {c:"Pentesting",q:"What is enumeration and why is it critical?",a:"Gathering detailed info about a target — services, versions, users, shares, configs. Most exploits depend on accurate enumeration. 'Enumerate more' is the answer when stuck on HTB.",d:"easy"},
+  {c:"Security+",q:"What is the CIA triad?",a:"Confidentiality: data seen only by authorised users. Integrity: data not tampered with. Availability: data accessible when needed. Foundation of all security decisions.",d:"easy"},
+  {c:"Security+",q:"Symmetric vs asymmetric encryption?",a:"Symmetric: same key to encrypt/decrypt (AES) — fast, for bulk data. Asymmetric: public/private key pair (RSA, ECC) — slower, for key exchange and digital signatures.",d:"easy"},
+  {c:"Security+",q:"What is PKI?",a:"Public Key Infrastructure — framework for managing digital certificates and public-key encryption. Components: CA, RA, CRL, OCSP, certificates. Enables HTTPS trust model.",d:"med"},
+  {c:"Security+",q:"What is MFA and what are the 3 factor types?",a:"Multi-Factor Authentication using 2+ of: (1) Something you know (password), (2) Something you have (authenticator app/token), (3) Something you are (biometrics).",d:"easy"},
+  {c:"Security+",q:"Vulnerability vs threat vs risk?",a:"Vulnerability: weakness in a system. Threat: potential danger that could exploit it. Risk = Probability × Impact. Risk management = reducing probability or impact.",d:"easy"},
+  {c:"Security+",q:"What is defence in depth?",a:"Layered security — if one control fails, another catches the attack. Layers: perimeter firewall, IDS/IPS, endpoint protection, MFA, data encryption, monitoring/logging.",d:"easy"},
+  {c:"Security+",q:"What is the principle of least privilege?",a:"Users and systems should only have minimum permissions needed. Limits blast radius when accounts are compromised. Apply to every user, service account, and application.",d:"easy"},
+  {c:"Security+",q:"What is a zero-day vulnerability?",a:"Vulnerability unknown to the vendor with no patch available. Called zero-day because defenders have had zero days to fix it. Extremely valuable to attackers.",d:"easy"},
+  {c:"Interview Q&A",q:"Tell me about yourself — cybersecurity edition.",a:"Lead with: current background (sales, technical mindset), pivot motivation (genuine passion), what you've done (THM, HTB, Portswigger, bug bounty), where you're heading (junior security role in Newcastle). Keep to 90 seconds.",d:"easy"},
+  {c:"Interview Q&A",q:"Why do you want to move into cybersecurity?",a:"Be authentic. Mention: genuine interest in how systems break, self-study completed, real examples from labs, the problem-solving aspect. Don't just say 'it pays well' — pair it with passion and specific examples.",d:"easy"},
+  {c:"Interview Q&A",q:"How do you stay current with cybersecurity news?",a:"Mention: Krebs on Security, Bleeping Computer, Portswigger Research blog, SANS Internet Storm Center, Reddit r/netsec, following researchers on Twitter, HackerOne Hacktivity disclosures.",d:"easy"},
+  {c:"Interview Q&A",q:"Describe responding to a phishing alert.",a:"1. Isolate affected user/machine. 2. Preserve email headers, URLs, attachments. 3. Check if others received same email. 4. Check if credentials entered. 5. Reset passwords if compromised. 6. Block IOCs. 7. Document in ticket.",d:"med"},
+  {c:"Interview Q&A",q:"What would you do if you found a critical vuln in scope?",a:"1. Document thoroughly with screenshots. 2. Stop testing to avoid further damage. 3. Notify client immediately per rules of engagement. 4. Don't exploit beyond PoC. 5. Write clear reproduction steps in report.",d:"med"},
+  {c:"Interview Q&A",q:"Explain a vulnerability to a non-technical manager.",a:"Use analogy: 'SQL injection is like a lock that opens for the wrong key — it doesn't check if the key belongs there.' Focus on business impact (data breach, financial loss), not technical detail.",d:"med"},
+  {c:"Interview Q&A",q:"What's your biggest weakness as a security professional?",a:"Be honest + self-aware. Example: 'I'm still building depth in network-layer attacks and Active Directory. I'm targeting this through the TJ Null OSCP prep list on HackTheBox.' Show a plan.",d:"easy"},
+  {c:"Interview Q&A",q:"What tools are you most comfortable with?",a:"Lead with tools you've actually used: Burp Suite (name specific features), Nmap, Gobuster, Wireshark, Linux CLI. Don't claim tools you haven't touched. Authenticity beats a long list.",d:"easy"},
+  {c:"Interview Q&A",q:"Where do you see yourself in 3 years?",a:"'I want to deepen offensive skills, earn OSCP, and contribute to real penetration test engagements. Long-term, I'm interested in specialising in web/API security or moving toward red teaming.'",d:"easy"},
+  {c:"Interview Q&A",q:"Do you have any questions for us?",a:"Always prepare 3: 'What does the first 90 days look like?', 'What are the biggest security challenges you face?', 'What training/growth opportunities exist?', 'What does the team structure look like?'",d:"easy"}
+];
+
+const CATS=['All','Web Security','Networking','SOC & Blue Team','Pentesting','Security+','Interview Q&A'];
+let ST={done:{},exp:{},xp:0,streak:0,lastDate:null,timer:{dl:{},log:[]},fc:{k:{},d:{}}};
+function save(){try{localStorage.setItem('cp3',JSON.stringify(ST));}catch(e){}}
+function load(){try{const d=localStorage.getItem('cp3');if(d){const p=JSON.parse(d);ST={...ST,...p};ST.timer=ST.timer||{dl:{},log:[]};ST.fc=ST.fc||{k:{},d:{}};};}catch(e){}}
+const dk=(wi,di)=>`w${wi}-d${di}`;const wk=wi=>`w${wi}`;
+const today=()=>new Date().toISOString().slice(0,10);
+
+const LVLS=[
+  {n:"Script Kiddie",i:"🌱",min:0,max:100,d:"Just starting. Keep going!"},
+  {n:"Recon Rookie",i:"🔍",min:100,max:250,d:"Learning the basics of enumeration."},
+  {n:"Web Warrior",i:"🕷",min:250,max:500,d:"Portswigger is your playground."},
+  {n:"Shell Hunter",i:"🐚",min:500,max:800,d:"Getting comfortable on HackTheBox."},
+  {n:"Bug Hunter",i:"🐛",min:800,max:1200,d:"Submitting real bug bounty reports."},
+  {n:"Pentest Pro",i:"⚔️",min:1200,max:1800,d:"OSCP is in your sights."},
+  {n:"Red Team Ranger",i:"🔴",min:1800,max:2500,d:"Thinking like a professional attacker."},
+  {n:"Elite Hacker",i:"🏴‍☠️",min:2500,max:9999,d:"Newcastle's finest. Hire this person."}
+];
+function getLvl(xp){for(let i=LVLS.length-1;i>=0;i--){if(xp>=LVLS[i].min)return{idx:i,...LVLS[i]};}return{idx:0,...LVLS[0]};}
+function addXP(n){ST.xp+=n;save();updXP();showToast(`+${n} XP!`,'g');}
+function updXP(){
+  const l=getLvl(ST.xp);
+  document.getElementById('nxp').textContent=ST.xp;document.getElementById('sx').textContent=ST.xp;
+  document.getElementById('nst').textContent=ST.streak;document.getElementById('ss').textContent=ST.streak;
+  document.getElementById('lvi').textContent=l.i;document.getElementById('lvn').textContent=l.n;
+  document.getElementById('lvd').textContent=l.d;
+  const nl=LVLS[Math.min(l.idx+1,LVLS.length-1)];
+  const pct=l.idx<LVLS.length-1?Math.round((ST.xp-l.min)/(l.max-l.min)*100):100;
+  document.getElementById('lvf').style.width=pct+'%';
+  document.getElementById('lvx').textContent=l.idx<LVLS.length-1?`${ST.xp}/${l.max} XP → ${nl.n}`:'MAX LEVEL 🏆';
+}
+function updStreak(){const t=today();if(ST.lastDate!==t){const y=new Date(Date.now()-86400000).toISOString().slice(0,10);ST.streak=ST.lastDate===y?ST.streak+1:1;ST.lastDate=t;save();}}
+
+let allExp=false;
+function toggleExpandAll(){allExp=!allExp;WKS.forEach((_,wi)=>{ST.exp[wk(wi)]=allExp;});save();renderRM();}
+function toggleDay(wi,di){const k=dk(wi,di);const was=ST.done[k];ST.done[k]=!was;if(!was){addXP(10);updStreak();}save();renderRM();}
+function toggleWeekDone(wi){
+  const w=WKS[wi];const nd=w.days.filter(d=>!d.rest).length;const cd=w.days.filter((d,di)=>!d.rest&&ST.done[dk(wi,di)]).length;
+  const nv=cd<nd;let gained=0;
+  w.days.forEach((d,di)=>{if(!d.rest){const k=dk(wi,di);if(nv&&!ST.done[k])gained+=10;ST.done[k]=nv;}});
+  if(nv&&gained>0){ST.xp+=gained;if(gained>=nd*10)ST.xp+=50;save();updXP();showToast(`+${gained} XP!`,'g');}
+  save();renderRM();
+}
+function toggleWeek(wi){ST.exp[wk(wi)]=!ST.exp[wk(wi)];save();renderRM();}
+function countDone(){let t=0,d=0;WKS.forEach((w,wi)=>{w.days.forEach((day,di)=>{if(!day.rest){t++;if(ST.done[dk(wi,di)])d++;}});});return{t,d};}
+
+function renderWeeks(cid,ph){
+  const c=document.getElementById(cid);c.innerHTML='';
+  WKS.forEach((w,wi)=>{
+    if(w.ph!==ph)return;
+    const dd=w.days.filter((d,di)=>!d.rest&&ST.done[dk(wi,di)]).length;
+    const td=w.days.filter(d=>!d.rest).length;
+    const isDone=dd===td&&td>0;const isOpen=ST.exp[wk(wi)];const pct=td>0?Math.round(dd/td*100):0;
+    const badge=w.cur?`<span class="tbadge">THIS WEEK</span>`:'';
+    let dH='';
+    w.days.forEach((d,di)=>{
+      if(d.rest){dH+=`<div class="drow"><div class="dnc"><div class="dn">${d.n}</div><div class="dd">${d.d}</div></div><div class="sess rest" style="grid-column:span 2;padding:10px 12px;"><span class="rtext">Rest day — recharge. No structured study.</span></div></div>`;}
+      else{
+        const ck=!!ST.done[dk(wi,di)];
+        const ml=d.m.u?`<a href="${d.m.u}" target="_blank" class="slink">↗ ${new URL(d.m.u).hostname.replace('www.','')}</a>`:'';
+        const al=d.a.u?`<a href="${d.a.u}" target="_blank" class="slink">↗ ${new URL(d.a.u).hostname.replace('www.','')}</a>`:'';
+        dH+=`<div class="drow"><div class="dnc"><div class="dck${ck?' ck':''}" onclick="toggleDay(${wi},${di})">${ck?'✓':''}</div><div class="dn" style="margin-top:4px">${d.n}</div><div class="dd">${d.d}</div></div><div class="sess mor"><div class="stype">Morning·1–1.5hrs</div><div class="stopic">${d.m.t}</div><div class="sdetail">${d.m.x}</div>${ml}</div><div class="sess aft"><div class="stype">Afternoon·1–1.5hrs</div><div class="stopic">${d.a.t}</div><div class="sdetail">${d.a.x}</div>${al}</div></div>`;
+      }
+    });
+    const card=document.createElement('div');
+    card.className=`wcard${isDone?' done':''}${isOpen?' open':''}${w.cur?' cur':''}`;
+    card.innerHTML=`<div class="whead" onclick="toggleWeek(${wi})"><div class="wcirc" onclick="event.stopPropagation();toggleWeekDone(${wi})">${isDone?'✓':''}</div><div class="winfo"><div class="wnum">Week ${w.wk}${badge}</div><div class="wtitle">${w.fo}</div><div class="wdates">${w.dt}</div></div><div class="wright"><div class="wpbar"><div class="wpfill" style="width:${pct}%"></div></div><div class="wbadge">${dd}/${td}</div><div class="warrow">▶</div></div></div><div class="wbody"><div class="dcols"><div class="colh">Day</div><div class="colh">Morning</div><div class="colh">Afternoon</div></div>${dH}</div>`;
+    c.appendChild(card);
+  });
+}
+function renderRM(){
+  renderWeeks('wp0',0);renderWeeks('wp1',1);
+  const{t,d}=countDone();const pct=t>0?Math.round(d/t*100):0;
+  document.getElementById('sd').textContent=d;document.getElementById('sp').textContent=pct+'%';
+  document.getElementById('opct').textContent=pct+'%';document.getElementById('ofill').style.width=pct+'%';
+  document.getElementById('exb').textContent=allExp?'Collapse all':'Expand all weeks';
+  updXP();renderSB();
+}
+function renderSB(){
+  const sc=document.getElementById('sbcontent');let html='';
+  [0,1].forEach(pi=>{
+    let wd=0,wt=0;WKS.filter(w=>w.ph===pi).forEach(w=>{const wi=WKS.indexOf(w);w.days.forEach((d,di)=>{if(!d.rest){wt++;if(ST.done[dk(wi,di)])wd++;}});});
+    const pp=wt>0?Math.round(wd/wt*100):0;const lbs=['Phase 1: Foundation','Phase 2: Certification'];
+    html+=`<div class="pi"><div class="pil">${lbs[pi]}<span>${pp}%</span></div><div class="track" style="height:4px"><div class="fill" style="width:${pp}%;background:${pi===0?'var(--ac)':'var(--a2)'}"></div></div></div>`;
+  });
+  html+=`<div style="margin-top:16px;font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Week by week</div>`;
+  WKS.filter(w=>w.ph<2).forEach(w=>{
+    const wi=WKS.indexOf(w);const dd=w.days.filter((d,di)=>!d.rest&&ST.done[dk(wi,di)]).length;const td=w.days.filter(d=>!d.rest).length;const pct=td>0?Math.round(dd/td*100):0;
+    html+=`<div class="pi"><div class="pil" style="font-size:10px">Wk${w.wk}: ${w.fo.slice(0,24)}...<span>${pct}%</span></div><div class="track" style="height:2px"><div class="fill" style="width:${pct}%;background:var(--a2)"></div></div></div>`;
+  });
+  sc.innerHTML=html;
+}
+let curPh=0;
+function showPhase(i){curPh=i;document.querySelectorAll('.psec').forEach((s,j)=>s.classList.toggle('active',j===i));document.querySelectorAll('.ptab').forEach((t,j)=>t.classList.toggle('active',j===i));}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sov').classList.toggle('open');}
+
+// TIMER
+let tInt=null,tStart=0,tEl=0,tRun=false,curSess='';
+function sessChanged(){curSess=document.getElementById('ssel').value;document.getElementById('tsn').textContent=curSess||'Select a topic to begin';}
+function timerStart(){
+  if(!curSess){showToast('Select a topic first!','o');return;}
+  tRun=true;tStart=Date.now()-tEl;tInt=setInterval(updTDisp,1000);
+  document.getElementById('tbst').style.display='none';document.getElementById('tbsp').style.display='';
+  document.getElementById('tdisp').classList.add('run');
+}
+function timerStop(){
+  if(!tRun)return;tRun=false;clearInterval(tInt);tEl=Date.now()-tStart;
+  const secs=Math.floor(tEl/1000);
+  if(secs<60){showToast('Too short to save (< 1 min)','');}
+  else{
+    const e={name:curSess,dur:secs,time:new Date().toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'}),date:today()};
+    ST.timer.log.unshift(e);ST.timer.dl[today()]=(ST.timer.dl[today()]||0)+secs;
+    const xg=Math.floor(secs/60)*2;ST.xp+=xg;updStreak();save();updXP();showToast(`Saved! +${xg} XP`,'g');
+  }
+  document.getElementById('tbst').style.display='';document.getElementById('tbsp').style.display='none';
+  document.getElementById('tdisp').classList.remove('run');renderTimer();
+}
+function timerReset(){if(tRun){clearInterval(tInt);tRun=false;}tEl=0;document.getElementById('tdisp').textContent='00:00:00';document.getElementById('tdisp').classList.remove('run');document.getElementById('tbst').style.display='';document.getElementById('tbsp').style.display='none';}
+function updTDisp(){const e=Date.now()-tStart;const s=Math.floor(e/1000);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;document.getElementById('tdisp').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;}
+function fmt(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60);return h>0?`${h}h ${m}m`:`${m}m`;}
+function renderTimer(){
+  const t=today();const ts=ST.timer.dl[t]||0;const tses=ST.timer.log.filter(s=>s.date===t).length;
+  const all=Object.values(ST.timer.dl).reduce((a,b)=>a+b,0);const days=Object.keys(ST.timer.dl).length;const avg=days>0?Math.floor(all/days):0;
+  document.getElementById('thr').textContent=fmt(ts);document.getElementById('tses').textContent=tses;
+  document.getElementById('tall').textContent=fmt(all);document.getElementById('tavg').textContent=fmt(avg);
+  const logs=ST.timer.log.filter(s=>s.date===t);
+  document.getElementById('loglist').innerHTML=logs.length===0?'<div class="lempty">No sessions yet today.<br>Hit START above!</div>':logs.map(s=>`<div class="litem"><span class="lname">${s.name}</span><span class="lmeta"><span class="ldur">${fmt(s.dur)}</span> · ${s.time}</span></div>`).join('');
+  const ds=[];for(let i=13;i>=0;i--){const dd=new Date(Date.now()-i*86400000);ds.push({ds:dd.toISOString().slice(0,10),lbl:dd.toLocaleDateString('en-AU',{weekday:'short'}).slice(0,2),secs:0});}
+  ds.forEach(d=>{d.secs=ST.timer.dl[d.ds]||0;});
+  const mx=Math.max(...ds.map(d=>d.secs),10800);
+  document.getElementById('bcht').innerHTML=ds.map(d=>{const pct=Math.round(d.secs/mx*100);const isT=d.ds===t;const col=d.secs>=10800?'var(--a2)':isT?'var(--ac)':'var(--bd2)';const hrs=d.secs>0?(d.secs/3600).toFixed(1)+'h':'';return`<div class="bcol"><div class="bval">${hrs}</div><div class="bar" style="height:${Math.max(pct,2)}%;background:${col}"></div><div class="blbl">${d.lbl}</div></div>`}).join('');
+}
+
+// FLASHCARDS
+let fcCards=[...CARDS],fcIdx=0,fcCat='All',fcK=0,fcD=0;
+function buildCats(){const c=document.getElementById('fccats');c.innerHTML=CATS.map(cat=>{const cnt=cat==='All'?CARDS.length:CARDS.filter(x=>x.c===cat).length;return`<button class="fccat${cat===fcCat?' active':''}" onclick="setCat('${cat}')">${cat}<span class="fccb">${cnt}</span></button>`;}).join('');}
+function setCat(cat){fcCat=cat;fcCards=cat==='All'?[...CARDS]:CARDS.filter(c=>c.c===cat);fcIdx=0;fcK=0;fcD=0;document.getElementById('cwrap').classList.remove('flipped');buildCats();renderCard();updFC();}
+function renderCard(){
+  if(!fcCards.length)return;const cd=fcCards[fcIdx];
+  document.getElementById('ccat').textContent=cd.c;document.getElementById('ccatb').textContent=cd.c;
+  document.getElementById('cq').textContent=cd.q;document.getElementById('ca').textContent=cd.a;
+  const dm={easy:1,med:2,hard:3};const dv=dm[cd.d]||1;
+  document.getElementById('cdiff').innerHTML=[1,2,3].map(i=>`<div class="ddot${i<=dv?' '+cd.d:''}"></div>`).join('');
+  document.getElementById('fcctr').textContent=`Card ${fcIdx+1} of ${fcCards.length}`;
+  document.getElementById('fctitle').textContent=fcCat;document.getElementById('fcl').textContent=fcCards.length-fcIdx;
+}
+function flipCard(){document.getElementById('cwrap').classList.toggle('flipped');}
+function nextCard(){document.getElementById('cwrap').classList.remove('flipped');fcIdx=(fcIdx+1)%fcCards.length;setTimeout(renderCard,50);}
+function prevCard(){document.getElementById('cwrap').classList.remove('flipped');fcIdx=(fcIdx-1+fcCards.length)%fcCards.length;setTimeout(renderCard,50);}
+function markCard(knew){const cd=fcCards[fcIdx];if(knew){fcK++;ST.fc.k[cd.q]=true;delete ST.fc.d[cd.q];ST.xp+=3;updXP();}else{fcD++;ST.fc.d[cd.q]=true;delete ST.fc.k[cd.q];}save();updFC();nextCard();}
+function updFC(){const t=fcK+fcD;document.getElementById('fck').textContent=fcK;document.getElementById('fcd').textContent=fcD;document.getElementById('fcp').textContent=t>0?Math.round(fcK/t*100)+'%':'—';}
+function shuffleDeck(){for(let i=fcCards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcCards[i],fcCards[j]]=[fcCards[j],fcCards[i]];}fcIdx=0;document.getElementById('cwrap').classList.remove('flipped');renderCard();showToast('Cards shuffled!','');}
+function resetFC(){fcK=0;fcD=0;updFC();showToast('Score reset','');}
+function weakOnly(){const w=CARDS.filter(c=>ST.fc.d[c.q]);if(!w.length){showToast('No weak cards yet! Mark some as Still Learning first.','o');return;}fcCards=[...w];fcIdx=0;document.getElementById('cwrap').classList.remove('flipped');renderCard();showToast(`${w.length} weak cards loaded`,'');}
+
+// PAGES
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const tabs=['roadmap','timer','flashcards','resources'];
+  const i=tabs.indexOf(id);if(i>=0)document.querySelectorAll('.nt')[i].classList.add('active');
+  if(id==='timer')renderTimer();if(id==='flashcards'){buildCats();renderCard();}
+}
+
+// TOAST
+function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type?' '+type:'');setTimeout(()=>t.classList.remove('show'),2500);}
+
+load();renderRM();buildCats();renderCard();renderTimer();
+</script>
+</body>
+</html>
